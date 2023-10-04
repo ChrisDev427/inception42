@@ -1,1 +1,46 @@
 # docker-compose
+
+networks:
+  inception:
+
+    #volumes:
+  #database:
+    #driver_opts:
+      #type: none
+        #o: bind
+        #device: REPERTOIRE_SOURCE_DU_VOLUME
+        #website:
+    #driver_opts:
+      #type: none
+        #o: bind
+        #device: REPERTOIRE_SOURCE_DU_VOLUME
+
+services:
+  nginx:
+    build: requirements/nginx/
+    container_name: nginx
+    ports:
+      - "443:443"
+        #volumes:
+        #- "website:/var/www/html"
+        # depends_on:
+        #- wordpress
+    networks:
+      - inception
+    restart: always
+    env_file: .env
+
+      # wordpress:
+    #build: requirements/wordpress/
+      #container_name: wordpress
+      #ports:
+      # - PORTS_A_OUVRIR
+        #volumes:
+      # - "website:/var/www/html"
+        #depends_on:
+      # - mariadb
+        #    - redis
+        #    networks:
+      #      - inception
+        #    restart: always
+      #    env_file: .env
