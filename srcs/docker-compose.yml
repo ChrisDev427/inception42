@@ -3,12 +3,13 @@
 networks:
   inception:
 
-    #volumes:
-  #database:
-    #driver_opts:
-      #type: none
-        #o: bind
-        #device: REPERTOIRE_SOURCE_DU_VOLUME
+volumes:
+  mariadb:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/chmassa/data/mariadb'
         #website:
     #driver_opts:
       #type: none
@@ -16,6 +17,17 @@ networks:
         #device: REPERTOIRE_SOURCE_DU_VOLUME
 
 services:
+  mariadb:
+    build: requirements/mariadb/
+    container_name: mariadb
+    expose:
+      - "3306"
+    volumes:                        # Voir plus bas
+      - mariadb:/var/lib/mysql
+    networks:
+      - inception
+    restart: unless-stopped
+    env_file: .env
   nginx:
     build: requirements/nginx/
     container_name: nginx
