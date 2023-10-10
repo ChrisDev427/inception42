@@ -8,5 +8,6 @@ COPY tools/mariadb_config.sh /etc/mariadb_config.sh
 
 RUN chmod +x /etc/mariadb_config.sh
 
-ENTRYPOINT ["bash", "/etc/mariadb_config.sh"]
+EXPOSE 3306
 
+ENTRYPOINT ["bash", "/etc/mariadb_config.sh"]
