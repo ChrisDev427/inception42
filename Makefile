@@ -7,14 +7,18 @@ RESET = \033[0m
 all: volumes up
 
 volumes: ## Create volumes needed
-	@echo "$(B_GREEN)checking volumes$(RESET)";
+	@echo "$(B_GREEN)checking volumes$(RESET)"
 	@if [ ! -d /home/chmassa/data/wordpress ]; then \
 		echo "$(B_BLUE)Creating wordpress volume$(RESET)"; \
 		mkdir -p /home/chmassa/data/wordpress; \
+	else \
+		echo "$(B_BLUE)wordpress folder is already exist$(RESET)"; \
 	fi
 	@if [ ! -d /home/chmassa/data/mariadb ]; then \
 		echo "$(B_BLUE)Creating mariadb volume$(RESET)"; \
 		mkdir -p /home/chmassa/data/mariadb; \
+	else \
+		echo "$(B_BLUE)mariadb folder is already exist$(RESET)"; \
 	fi
 cleanvol: ## Remove persistant datas
 	@if [ -d /home/chmassa/data/wordpress ]; then \

@@ -3,16 +3,19 @@ version: "3.5"
 
 networks:
   inception:
+    name: inception
     driver: bridge
 
 volumes:
   mariadb:
+    name: mariadb
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
       device: '/home/chmassa/data/mariadb'
   website:
+    name: wordpress
     driver: local
     driver_opts:
       type: 'none'
@@ -22,7 +25,7 @@ volumes:
 services:
   mariadb:
     build: requirements/mariadb/
-    image: mariadb
+    image: mariadb:V1
     container_name: mariadb_inception42
     ports:
       - "3306:3306"
@@ -35,7 +38,7 @@ services:
 
   nginx:
     build: requirements/nginx/
-    image: nginx
+    image: nginx:V1
     container_name: nginx_inception42
     ports:
       - "443:443"
@@ -45,12 +48,12 @@ services:
       - wordpress
     networks:
       - inception
-    restart: always
+    restart: on-failure
     env_file: .env
 
   wordpress:
     build: requirements/wordpress/
-    image: wordpress
+    image: wordpress:V1
     container_name: wordpress_inception42
     ports:
       - "9000:9000"
@@ -60,5 +63,5 @@ services:
       - mariadb
     networks:
       - inception
-    restart: always
+    restart: on-failure
     env_file: .env

@@ -18,8 +18,9 @@ sed -i'' 's/;clear_env = no/clear_env = no/' /etc/php/7.3/fpm/pool.d/www.conf
 echo -e "${GREEN}DONE${RESET}"
 
 if [ -f "/var/www/wordpress/wp-config.php" ]; then
-	echo -e "${B_BLUE}wordpress is already configured${RESET}"
+	echo -e "${B_BLUE}wordpress is already installed and configured${RESET}"
 else
+	echo -e "${B_BLUE}install: wordpress${RESET}"
 	cd /var/www/wordpress
 	echo -e "${B_BLUE}wp core download${RESET}"
 	wp core download --allow-root
