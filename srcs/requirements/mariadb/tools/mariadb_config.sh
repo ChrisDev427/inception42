@@ -6,7 +6,7 @@ B_GREEN="\033[1;32m"
 B_BLUE="\033[1;34m"
 RESET="\033[0m"
 
-echo -e "${B_GREEN}################ Starting script 'mariadb_config.sh' ###########################################################${RESET}"
+echo -e "${B_GREEN}################ Starting script 'mariadb_config.sh' #############################################################${RESET}"
 
 echo -e "${B_BLUE}Modify 50-server.cnf${RESET}"
 sed -i'' '/bind-address/ s/127.0.0.1/0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf
